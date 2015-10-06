@@ -1,2 +1,52 @@
 # CakePHP Gearman plugin
 A gearman plugin for CakePHP 3.x
+
+## How to use
+First load this plugin using Composer:
+```
+composer require cvo-technologies/cakephp-gearman
+```
+Add the plugin to your bootstrap:
+```
+bin/cake load plugin load cvo-technologies/gearman
+```
+
+Now it's loaded and you should be able to start a worker:
+```
+bin/cake worker
+```
+
+## Create a job
+We use a Shell Task as job, so for example we create a `SleepTask` located at `src/Shell/Task/SleepTask.php` with the this main method:
+```
+public function main($workload, GearmanJob $job)
+{
+  $job->sendStatus(0, 3);
+  
+  sleep($workload['timeout']);
+  
+  $job->sendStatus(1, 3);
+  
+  sleep($workload['timeout']);
+  
+  $job->sendStatus(2, 3
+  
+  sleep($workload['timeout']);
+  
+  return array(
+      'total_timeout' => $workload['timeout'] * 3
+  );
+}
+```
+The plugin takes care of arrays and objects. When you submit an array in the job, you will receive an array in the workload.
+
+## Start a job
+Use the `JobAwareTrait` trait in your class and use `$this->execute` to execute a job. You can pass the following parameters to this method: 
+* $name
+** Name of the job (task in cakephp)
+* $workload
+** Mixed, can be either an array, string, int or everything else. 
+* $background = true
+** Run in background. This function returns the unique id.
+* $priority = Gearman::PRIORITY_NORMAL.
+** _LOW, _NORMAL or _HIGH.
