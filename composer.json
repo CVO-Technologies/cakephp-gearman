@@ -1,0 +1,42 @@
+{
+    "name": "cvo-technologies/cakephp-gearman",
+    "description": "A gearman plugin for CakePHP 3",
+    "type": "cakephp-plugin",
+    "keywords": [
+        "cakephp",
+        "CVO-technologies",
+        "gearman",
+        "workers",
+        "jobs"
+    ],
+    "homepage": "https://github.com/cvo-technologies/cakephp-gearman",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Wouter van Os",
+            "homepage": "http://wouter0100.nl",
+            "role": "Author"
+        }
+    ],
+    "support": {
+        "issues": "https://github.com/cvo-technologies/cakephp-gearman/issues",
+        "source": "https://github.com/cvo-technologies/cakephp-gearman"
+    },
+    "require": {
+        "cakephp/cakephp": "~3.0"
+    },
+    "require-dev": {
+        "cakephp/cakephp-codesniffer": "2.*",
+        "phpunit/phpunit": "4.1.*"
+    },
+    "autoload": {
+        "psr-4": {
+            "CvoTechnologies\\Gearman\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "CvoTechnologies\\Gearman\\Test\\": "tests"
+        }
+    }
+}
