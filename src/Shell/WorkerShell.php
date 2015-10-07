@@ -6,6 +6,7 @@ use Cake\Core\Configure;
 use CvoTechnologies\Gearman\JobAwareTrait;
 use GearmanJob;
 use GearmanWorker;
+use Psr\Log\LogLevel;
 
 class WorkerShell extends Shell
 {
@@ -26,7 +27,14 @@ class WorkerShell extends Shell
                     $workload = $job->workload();
                 }
 
-                $response = $task->main($workload, $job);
+                try {
+                    $response = $task->main($workload, $job);
+                }
+                catch (\Exception $exception) {
+                    $response = null;
+
+                    $this->log($exception, LogLevel::ERROR);
+                }
 
                 if (is_array($response) || is_object($response)) {
                     $response = serialize($response);
