@@ -21,8 +21,7 @@ class WorkerShell extends Shell
             $worker->addFunction($job, function(GearmanJob $job) use ($options) {
                 $task = $this->Tasks->load($options['className']);
 
-                $workload = unserialize($job->workload());
-
+                $workload = @unserialize($job->workload());
                 if ($workload === false) {
                     $workload = $job->workload();
                 }
