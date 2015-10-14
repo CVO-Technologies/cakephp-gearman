@@ -63,6 +63,8 @@ trait JobAwareTrait
 
         $response = $this->gearmanClient()->{$func}($name, $workload);
 
+        DebugJob::add($name, $workload, $background, $priority);
+
         if ($background) {
             return $response;
         }
