@@ -50,3 +50,14 @@ Use the `JobAwareTrait` trait in your class and use `$this->execute` to execute 
   * Run in background. This function returns the unique id.
 * $priority = Gearman::PRIORITY_NORMAL.
   * _LOW, _NORMAL or _HIGH.
+
+## E-mail job
+By default, we ship a e-mail job. This job will sent e-mails as in a worker, which dramaticly improves page load times. If ou want to use this e-mail job, add a new EmailTransporter to your config:
+```
+'worker' => [
+    'className' => 'CvoTechnologies/Gearman.Worker',
+    'transport' => 'default',
+    'background' => true
+]
+```
+Then use this EmailTransporter to send the e-mails. The job will send the e-mails using the EmailTransporter defined in the `transport` key.
