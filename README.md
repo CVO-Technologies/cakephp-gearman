@@ -8,7 +8,7 @@ composer require cvo-technologies/cakephp-gearman
 ```
 Add the plugin to your bootstrap:
 ```
-bin/cake load plugin load cvo-technologies/gearman
+bin/cake plugin load cvo-technologies/gearman
 ```
 
 Now it's loaded and you should be able to start a worker:
