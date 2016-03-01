@@ -16,6 +16,11 @@
             "name": "Wouter van Os",
             "homepage": "http://wouter0100.nl",
             "role": "Author"
+        },
+        {
+            "name": "Marlin Cremers",
+            "homepage": "https://cvo-technologies.com/",
+            "role": "Author"
         }
     ],
     "support": {
@@ -23,6 +28,7 @@
         "source": "https://github.com/cvo-technologies/cakephp-gearman"
     },
     "require": {
+        "ext-gearman": "*",
         "cakephp/cakephp": "~3.0"
     },
     "require-dev": {
