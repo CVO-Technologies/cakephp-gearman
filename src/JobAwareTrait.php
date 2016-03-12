@@ -2,6 +2,7 @@
 namespace CvoTechnologies\Gearman;
 
 use Cake\Core\Configure;
+use Cake\Core\Exception\Exception;
 use GearmanClient;
 use GearmanWorker;
 
@@ -14,10 +15,11 @@ trait JobAwareTrait
      * 
      * @return GearmanClient
      */
-    public function gearmanClient() {
+    public function gearmanClient()
+    {
         $client = new GearmanClient();
 
-        $servers = Configure::read('Gearman.Servers');
+        $servers = self::getServers();
 
         $client->addServers(implode(',', $servers));
 
@@ -30,10 +32,11 @@ trait JobAwareTrait
      * 
      * @return GearmanWorker
      */
-    public function gearmanWorker() {
+    public function gearmanWorker()
+    {
         $client = new GearmanWorker();
 
-        $servers = Configure::read('Gearman.Servers');
+        $servers = self::getServers();
 
         $client->addServers(implode(',', $servers));
 
@@ -58,7 +61,8 @@ trait JobAwareTrait
      * @param bool $background If it's a background job
      * @param int $priority A priority level from Gearman::PRIORTIY_*
      */
-    public function execute($name, $workload, $background = true, $priority = Gearman::PRIORITY_NORMAL) {
+    public function execute($name, $workload, $background = true, $priority = Gearman::PRIORITY_NORMAL)
+    {
         $func = 'do';
         switch ($priority) {
             case Gearman::PRIORITY_LOW:
@@ -96,4 +100,20 @@ trait JobAwareTrait
         return $response;
     }
 
+    /**
+     * Returns an array with all configured Gearman servers.
+     *
+     * @throws \Cake\Core\Exception\Exception
+     * @return array Flat array with servers as found in Configure
+     */
+    protected static function getServers()
+    {
+        $servers = Configure::readOrFail('Gearman.Servers');
+
+        if (empty($servers)) {
+            throw new Exception('Invalid Gearman configuration: you must configure at least one server');
+        }
+
+        return $servers;
+    }
 }
