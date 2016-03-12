@@ -2,7 +2,6 @@
 
 namespace CvoTechnologies\Gearman\Test\TestCase\Shell\Task;
 
-use Cake\Core\Configure;
 use Cake\Mailer\Email;
 use Cake\TestSuite\TestCase;
 use CvoTechnologies\Gearman\Shell\Task\EmailTask;
@@ -12,7 +11,7 @@ class EmailTaskTest extends TestCase
     public function setUp()
     {
         Email::configTransport('default', [
-            'className' => 'Debug'
+            'className' => 'Debug',
         ]);
     }
 
@@ -26,9 +25,9 @@ class EmailTaskTest extends TestCase
 
         $emailTask = new EmailTask();
         $emailTask->main([
-            'email' => new Email(),
+            'email'       => new Email(),
             'fullBaseUrl' => 'http://example.com',
-            'transport' => 'default'
+            'transport'   => 'default',
         ]);
     }
 
@@ -39,9 +38,9 @@ class EmailTaskTest extends TestCase
         $emailTask->main([
             'email' => new Email([
                 'from' => 'from@example.com',
-                'to' => 'to@example.com'
+                'to'   => 'to@example.com',
             ]),
-            'transport' => 'default'
+            'transport' => 'default',
         ]);
     }
 
@@ -52,10 +51,10 @@ class EmailTaskTest extends TestCase
         $result = $emailTask->main([
             'email' => new Email([
                 'from' => 'from@example.com',
-                'to' => 'to@example.com'
+                'to'   => 'to@example.com',
             ]),
             'fullBaseUrl' => 'http://example.com',
-            'transport' => 'default'
+            'transport' => 'default',
         ]);
 
         $this->assertInternalType('array', $result);

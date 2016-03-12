@@ -11,7 +11,7 @@ class WorkerTransportTest extends TestCase
     public function setUp()
     {
         Configure::write('Gearman.Servers', [
-            '127.0.0.1'
+            '127.0.0.1',
         ]);
     }
 
@@ -26,9 +26,9 @@ class WorkerTransportTest extends TestCase
         $transport->expects($this->once())
             ->method('execute')
             ->with('emailWithWorker', [
-                'email' => $email,
-                'transport' => 'default',
-                'fullBaseUrl' => 'http://localhost'
+                'email'       => $email,
+                'transport'   => 'default',
+                'fullBaseUrl' => 'http://localhost',
             ]);
 
         $this->assertTrue($transport->send($email));
@@ -40,8 +40,8 @@ class WorkerTransportTest extends TestCase
             ->setMethods(['execute'])
             ->setConstructorArgs([
                 [
-                    'background' => false
-                ]
+                    'background' => false,
+                ],
             ]);
 
         $email = new Email();

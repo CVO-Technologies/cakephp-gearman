@@ -3,11 +3,9 @@
 namespace CvoTechnologies\Gearman\Test\TestCase\Shell\Task;
 
 use Cake\Core\Configure;
-use Cake\Mailer\Email;
 use Cake\TestSuite\TestCase;
 use CvoTechnologies\Gearman\Gearman;
 use CvoTechnologies\Gearman\JobAwareTrait;
-use CvoTechnologies\Gearman\Shell\Task\EmailTask;
 
 class JobAwareTraitClass
 {
@@ -19,7 +17,7 @@ class JobAwareTraitTest extends TestCase
     public function setUp()
     {
         Configure::write('Gearman.Servers', [
-            '127.0.0.1'
+            '127.0.0.1',
         ]);
     }
 
