@@ -2,6 +2,7 @@
 namespace CvoTechnologies\Gearman;
 
 use Cake\Core\Configure;
+use Cake\Core\Exception\Exception;
 use GearmanClient;
 use GearmanWorker;
 
@@ -11,13 +12,14 @@ trait JobAwareTrait
     /**
      * Setup a GearmanClient object configured
      * with the servers from the configuration.
-     * 
+     *
      * @return GearmanClient
      */
-    public function gearmanClient() {
+    public function gearmanClient()
+    {
         $client = new GearmanClient();
 
-        $servers = Configure::read('Gearman.Servers');
+        $servers = static::_getGearmanServers();
 
         $client->addServers(implode(',', $servers));
 
@@ -27,13 +29,14 @@ trait JobAwareTrait
     /**
      * Setup a GearmanWorker object configured
      * with the servers from the configuration.
-     * 
+     *
      * @return GearmanWorker
      */
-    public function gearmanWorker() {
+    public function gearmanWorker()
+    {
         $client = new GearmanWorker();
 
-        $servers = Configure::read('Gearman.Servers');
+        $servers = static::_getGearmanServers();
 
         $client->addServers(implode(',', $servers));
 
@@ -43,22 +46,23 @@ trait JobAwareTrait
     /**
      * Execute a job by sending it to the
      * Gearman server using the GearmanClient
-     * 
+     *
      * Example for a background job with normal priority:
      * $this->execute('sleep', ['seconds' => 60]);
-     * 
+     *
      * Example for a background job with HIGH priority:
      * $this->execute('sleep', ['seconds' => 60], true, Gearman::PRIORITY_HIGH);
      *
      * Example for a normal job with HIGH priority:
      * $this->execute('sleep', ['seconds' => 60], false, Gearman::PRIORITY_HIGH);
-     *      * 
+     *
      * @param string $name Name of the job to execute
      * @param mixed $workload Any type of workload is supported (as long as it's serializable)
      * @param bool $background If it's a background job
      * @param int $priority A priority level from Gearman::PRIORTIY_*
      */
-    public function execute($name, $workload, $background = true, $priority = Gearman::PRIORITY_NORMAL) {
+    public function execute($name, $workload, $background = true, $priority = Gearman::PRIORITY_NORMAL)
+    {
         $func = 'do';
         switch ($priority) {
             case Gearman::PRIORITY_LOW:
@@ -96,4 +100,20 @@ trait JobAwareTrait
         return $response;
     }
 
+    /**
+     * Returns an array with all configured Gearman servers.
+     *
+     * @throws \Cake\Core\Exception\Exception
+     * @return array Flat array with servers as found in Configure
+     */
+    protected static function _getGearmanServers()
+    {
+        $servers = Configure::readOrFail('Gearman.Servers');
+
+        if (empty($servers)) {
+            throw new Exception('Invalid Gearman configuration: you must configure at least one server');
+        }
+
+        return $servers;
+    }
 }
