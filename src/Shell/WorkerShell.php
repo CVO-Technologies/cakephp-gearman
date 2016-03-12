@@ -20,7 +20,7 @@ class WorkerShell extends Shell
     {
         $worker = $this->gearmanWorker();
 
-        $jobs = self::getJobs();
+        $jobs = self::_getJobs();
 
         foreach ($jobs as $job => $options) {
             $worker->addFunction($job, function (GearmanJob $job) use ($options) {
@@ -61,7 +61,7 @@ class WorkerShell extends Shell
      * @throws \Cake\Core\Exception\Exception
      * @return array Hash with jobs as found in Configure
      */
-    protected function getJobs()
+    protected function _getJobs()
     {
         $jobs = Configure::read('Gearman.Jobs');
 
