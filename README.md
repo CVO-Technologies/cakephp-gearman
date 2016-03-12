@@ -44,7 +44,7 @@ public function main($workload, GearmanJob $job)
 
   sleep($workload['timeout']);
 
-  $job->sendStatus(2, 3
+  $job->sendStatus(2, 3);
 
   sleep($workload['timeout']);
 
