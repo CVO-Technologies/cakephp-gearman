@@ -11,7 +11,7 @@ Gearman task offloading for CakePHP 3.
 
 Use this plugin to drastically reduce page load times by offloading
 time consuming processes (like sending emails and resizing uploaded images) to
-the Gearman Job Server on your local system.
+the Gearman Job Server.
 
 ## Installation
 
