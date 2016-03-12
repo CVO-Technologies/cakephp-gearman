@@ -5,7 +5,6 @@ use Cake\Console\Shell;
 use Cake\Core\Configure;
 use CvoTechnologies\Gearman\JobAwareTrait;
 use GearmanJob;
-use GearmanWorker;
 use Psr\Log\LogLevel;
 
 class WorkerShell extends Shell
@@ -16,7 +15,7 @@ class WorkerShell extends Shell
     {
         $worker = $this->gearmanWorker();
 
-        $jobs = Configure::read('Jobs');
+        $jobs = self::getJobs();
 
         foreach ($jobs as $job => $options) {
             $worker->addFunction($job, function(GearmanJob $job) use ($options) {
@@ -50,5 +49,22 @@ class WorkerShell extends Shell
                 break;
             }
         }
+    }
+
+    /**
+     * Returns an array with all configured jobs.
+     *
+     * @throws \Cake\Core\Exception\Exception
+     * @return array Hash with jobs as found in Configure
+     */
+    private function getJobs()
+    {
+        $jobs = Configure::read('Jobs');
+
+        if (empty($jobs)) {
+            $this->abort('Invalid Gearman configuration: you must configure at least one job before starting this worker');
+        }
+
+        return $jobs;
     }
 }
