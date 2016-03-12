@@ -3,7 +3,7 @@
 use Cake\Core\Configure;
 use Cake\Utility\Hash;
 
-\Cake\Core\Configure::write('Jobs.emailWithWorker', [
+Configure::write('Gearman.Jobs.emailWithWorker', [
     'className' => 'CvoTechnologies/Gearman.Email'
 ]);
 
