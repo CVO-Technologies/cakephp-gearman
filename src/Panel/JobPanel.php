@@ -11,7 +11,7 @@ class JobPanel extends DebugPanel
     public $plugin = 'CvoTechnologies/Gearman';
 
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
     public function summary()
     {
@@ -19,12 +19,12 @@ class JobPanel extends DebugPanel
     }
 
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
     public function data()
     {
         return [
-            'jobs' => DebugJob::$jobs
+            'jobs' => DebugJob::$jobs,
         ];
     }
 }

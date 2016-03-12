@@ -28,12 +28,13 @@
         "source": "https://github.com/cvo-technologies/cakephp-gearman"
     },
     "require": {
+        "php": ">=5.5.9",
         "ext-gearman": "*",
-        "cakephp/cakephp": "~3.0"
+        "cakephp/cakephp": "~3.2"
     },
     "require-dev": {
-        "cakephp/cakephp-codesniffer": "2.*",
-        "phpunit/phpunit": "4.1.*"
+        "phpunit/phpunit": "4.1.*",
+        "cakephp/debug_kit": "~3.2"
     },
     "autoload": {
         "psr-4": {
@@ -42,6 +43,7 @@
     },
     "autoload-dev": {
         "psr-4": {
+            "TestApp\\": "tests/TestApp/src",
             "CvoTechnologies\\Gearman\\Test\\": "tests"
         }
     }

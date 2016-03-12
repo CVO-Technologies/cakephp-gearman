@@ -8,7 +8,6 @@ use GearmanWorker;
 
 trait JobAwareTrait
 {
-
     /**
      * Setup a GearmanClient object configured
      * with the servers from the configuration.
@@ -45,7 +44,7 @@ trait JobAwareTrait
 
     /**
      * Execute a job by sending it to the
-     * Gearman server using the GearmanClient
+     * Gearman server using the GearmanClient.
      *
      * Example for a background job with normal priority:
      * $this->execute('sleep', ['seconds' => 60]);
@@ -57,9 +56,10 @@ trait JobAwareTrait
      * $this->execute('sleep', ['seconds' => 60], false, Gearman::PRIORITY_HIGH);
      *
      * @param string $name Name of the job to execute
-     * @param mixed $workload Any type of workload is supported (as long as it's serializable)
-     * @param bool $background If it's a background job
-     * @param int $priority A priority level from Gearman::PRIORTIY_*
+     * @param mixed  $workload Any type of workload is supported (as long as it's serializable)
+     * @param bool   $background If it's a background job
+     * @param int    $priority A priority level from Gearman::PRIORTIY_*
+     * @return mixed The response from the job or the job id in case of a background job
      */
     public function execute($name, $workload, $background = true, $priority = Gearman::PRIORITY_NORMAL)
     {
@@ -104,6 +104,7 @@ trait JobAwareTrait
      * Returns an array with all configured Gearman servers.
      *
      * @throws \Cake\Core\Exception\Exception
+     *
      * @return array Flat array with servers as found in Configure
      */
     protected static function _getGearmanServers()

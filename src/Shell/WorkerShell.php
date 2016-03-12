@@ -20,7 +20,7 @@ class WorkerShell extends Shell
     {
         $worker = $this->gearmanWorker();
 
-        $jobs = self::_getJobs();
+        $jobs = $this->_getJobs();
 
         foreach ($jobs as $job => $options) {
             $worker->addFunction($job, function (GearmanJob $job) use ($options) {
@@ -49,7 +49,7 @@ class WorkerShell extends Shell
 
         while ($worker->work()) {
             if ($worker->returnCode() != GEARMAN_SUCCESS) {
-                echo "return_code: " . $worker->returnCode() . "\n";
+                $this->out('return_code: ' . $worker->returnCode());
                 break;
             }
         }
@@ -59,6 +59,7 @@ class WorkerShell extends Shell
      * Returns an array with all configured jobs.
      *
      * @throws \Cake\Core\Exception\Exception
+     *
      * @return array Hash with jobs as found in Configure
      */
     protected function _getJobs()

@@ -8,7 +8,6 @@ use Psr\Log\LogLevel;
 
 class EmailTask extends Shell
 {
-
     public function main(array $workload)
     {
         $defineFullBaseUrl = !empty($workload['fullBaseUrl']);

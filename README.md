@@ -1,17 +1,26 @@
 # CakePHP Gearman plugin
 
+
+[![Build Status](https://img.shields.io/travis/cvo-technologies/cakephp-gearman/master.svg?style=flat-square)](https://travis-ci.org/cvo-technologies/cakephp-gearman)
+[![StyleCI Status](https://styleci.io/repos/43746752/shield)](https://styleci.io/repos/43746752)
+[![Coverage Status](https://img.shields.io/codecov/c/github/cvo-technologies/cakephp-gearman/master.svg?style=flat-square)](https://codecov.io/github/cvo-technologies/cakephp-gearman)
+[![Total Downloads](https://img.shields.io/packagist/dt/cvo-technologies/cakephp-gearman.svg?style=flat-square)](https://packagist.org/packages/cvo-technologies/cakephp-gearman)
+[![License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](LICENSE.txt)
+
 Gearman task offloading for CakePHP 3.
 
 ## Requirements
 
-- CakePHP 3.0+
-- [Gearman](http://gearman.org)
+- PHP 5.5.9+
+- CakePHP 3.2+
+- [Gearman Job Server](http://gearman.org)
+- [Gearman PHP extension](http://php.net/manual/en/book.gearman.php)
 
 ## Why use this plugin?
 
 Use this plugin to drastically reduce page load times by offloading
 time consuming processes (like sending emails and resizing uploaded images) to
-the Gearman Job Server on your local system.
+a Gearman Job Server.
 
 ## Installation
 
@@ -95,7 +104,6 @@ configuration section:
 Then add the following worker configuration to your existing EmailTransporter
 configuration section (most likely found in `app.php`):
 
->>>>>>> Documentation rewrite
 ```php
 'worker' => [
     'className' => 'CvoTechnologies/Gearman.Worker',
@@ -177,4 +185,3 @@ Please note that the `execute()` method takes the following parameters:
 - `$workload`: mixed, can be either an array, string, int or everything else
 - `$background`: boolean, true to run in background
 - `$priority`: Gearman::PRIORITY_NORMAL, _LOW, _NORMAL or _HIGH
-

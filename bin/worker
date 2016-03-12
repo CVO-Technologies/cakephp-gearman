@@ -1,0 +1,73 @@
+#!/usr/bin/php -q
+<?php
+/**
+ * Command-line code generation utility to automate programmer chores.
+ *
+ * CakePHP(tm) : Rapid Development Framework (http://cakephp.org)
+ * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
+ *
+ * Licensed under The MIT License
+ * For full copyright and license information, please see the LICENSE.txt
+ * Redistributions of files must retain the above copyright notice.
+ *
+ * @copyright     Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
+ * @link          http://cakephp.org CakePHP(tm) Project
+ * @since         2.0.0
+ * @license       http://www.opensource.org/licenses/mit-license.php MIT License
+ */
+
+use Cake\Core\Configure;
+use Cake\Core\Plugin;
+
+$minVersion = '5.5.9';
+if (file_exists('composer.json')) {
+    $composer = json_decode(file_get_contents('composer.json'));
+    if (isset($composer->require->php)) {
+        $minVersion = preg_replace('/([^0-9\.])/', '', $composer->require->php);
+    }
+}
+if (version_compare(phpversion(), $minVersion, '<')) {
+    fwrite(STDERR, sprintf("Minimum PHP version: %s. You are using: %s.\n", $minVersion, phpversion()));
+    exit(-1);
+}
+
+if (!defined('DS')) {
+    define('DS', DIRECTORY_SEPARATOR);
+}
+
+if (!file_exists(dirname(__DIR__)  . DS . 'vendor' . DS . 'cakephp-plugins.php')) {
+
+    if (!defined('ROOT')) {
+        define('ROOT', 'tests' . DS . 'TestApp');
+    }
+    if (!defined('APP_DIR')) {
+        define('APP_DIR', 'src');
+    }
+    if (!defined('APP')) {
+        define('APP', ROOT . DS . APP_DIR . DS);
+    }
+    if (!defined('CAKE_CORE_INCLUDE_PATH')) {
+        define('CAKE_CORE_INCLUDE_PATH', dirname(dirname(ROOT)) . DS . 'vendor' . DS . 'cakephp' . DS . 'cakephp');
+    }
+    if (!defined('CORE_PATH')) {
+        define('CORE_PATH', CAKE_CORE_INCLUDE_PATH . DS);
+    }
+    if (!defined('CAKE')) {
+        define('CAKE', CORE_PATH . 'src' . DS);
+    }
+
+    require dirname(__DIR__) . '/vendor/autoload.php';
+
+    require ROOT  . DS . 'config' . DS . 'bootstrap.php';
+
+    Plugin::load('CvoTechnologies/Gearman', ['path' => './', 'bootstrap' => true]);
+
+    Configure::write('Gearman.Servers', [
+        '127.0.0.1'
+    ]);
+} else {
+    require dirname(__DIR__)  . DS . 'config' . DS . 'bootstrap.php';
+}
+
+$shellDispatcher = new \Cake\Console\ShellDispatcher([$_SERVER['argv'][0], 'worker']);
+exit($shellDispatcher->dispatch());
