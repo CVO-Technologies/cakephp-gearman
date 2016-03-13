@@ -18,7 +18,7 @@ class WorkerTransport extends AbstractTransport
      * @var array
      */
     protected $_defaultConfig = [
-        'transport'  => 'default',
+        'transport' => 'default',
         'background' => true,
     ];
 
@@ -32,8 +32,8 @@ class WorkerTransport extends AbstractTransport
     public function send(Email $email)
     {
         $result = $this->execute('emailWithWorker', [
-            'email'       => $email,
-            'transport'   => $this->config('transport'),
+            'email' => $email,
+            'transport' => $this->config('transport'),
             'fullBaseUrl' => Configure::read('App.fullBaseUrl'),
         ], $this->config('background'));
 

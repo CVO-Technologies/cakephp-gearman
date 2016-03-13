@@ -2,7 +2,6 @@
 
 namespace CvoTechnologies\Gearman\Test\TestCase\Shell\Task;
 
-use Cake\Core\Configure;
 use Cake\TestSuite\TestCase;
 use CvoTechnologies\Gearman\DebugJob;
 use CvoTechnologies\Gearman\Gearman;
@@ -14,22 +13,22 @@ class JobPanelTest extends TestCase
     {
         DebugJob::$jobs = [
             [
-                'name'       => 'job',
-                'workload'   => [],
+                'name' => 'job',
+                'workload' => [],
                 'background' => true,
-                'priority'   => Gearman::PRIORITY_HIGH,
+                'priority' => Gearman::PRIORITY_HIGH,
             ],
             [
-                'name'       => 'job',
-                'workload'   => [],
+                'name' => 'job',
+                'workload' => [],
                 'background' => true,
-                'priority'   => Gearman::PRIORITY_LOW,
+                'priority' => Gearman::PRIORITY_LOW,
             ],
             [
-                'name'       => 'job',
-                'workload'   => [],
+                'name' => 'job',
+                'workload' => [],
                 'background' => true,
-                'priority'   => Gearman::PRIORITY_NORMAL,
+                'priority' => Gearman::PRIORITY_NORMAL,
             ]
         ];
     }
@@ -48,22 +47,22 @@ class JobPanelTest extends TestCase
         $this->assertEquals([
             'jobs' => [
                 [
-                    'name'       => 'job',
-                    'workload'   => [],
+                    'name' => 'job',
+                    'workload' => [],
                     'background' => true,
-                    'priority'   => Gearman::PRIORITY_HIGH,
+                    'priority' => Gearman::PRIORITY_HIGH,
                 ],
                 [
-                    'name'       => 'job',
-                    'workload'   => [],
+                    'name' => 'job',
+                    'workload' => [],
                     'background' => true,
-                    'priority'   => Gearman::PRIORITY_LOW,
+                    'priority' => Gearman::PRIORITY_LOW,
                 ],
                 [
-                    'name'       => 'job',
-                    'workload'   => [],
+                    'name' => 'job',
+                    'workload' => [],
                     'background' => true,
-                    'priority'   => Gearman::PRIORITY_NORMAL,
+                    'priority' => Gearman::PRIORITY_NORMAL,
                 ]
             ]
         ], $panel->data());

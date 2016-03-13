@@ -25,9 +25,9 @@ class EmailTaskTest extends TestCase
 
         $emailTask = new EmailTask();
         $emailTask->main([
-            'email'       => new Email(),
+            'email' => new Email(),
             'fullBaseUrl' => 'http://example.com',
-            'transport'   => 'default',
+            'transport' => 'default',
         ]);
     }
 
@@ -38,7 +38,7 @@ class EmailTaskTest extends TestCase
         $emailTask->main([
             'email' => new Email([
                 'from' => 'from@example.com',
-                'to'   => 'to@example.com',
+                'to' => 'to@example.com',
             ]),
             'transport' => 'default',
         ]);
@@ -51,7 +51,7 @@ class EmailTaskTest extends TestCase
         $result = $emailTask->main([
             'email' => new Email([
                 'from' => 'from@example.com',
-                'to'   => 'to@example.com',
+                'to' => 'to@example.com',
             ]),
             'fullBaseUrl' => 'http://example.com',
             'transport' => 'default',

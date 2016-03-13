@@ -26,8 +26,8 @@ class WorkerTransportTest extends TestCase
         $transport->expects($this->once())
             ->method('execute')
             ->with('emailWithWorker', [
-                'email'       => $email,
-                'transport'   => 'default',
+                'email' => $email,
+                'transport' => 'default',
                 'fullBaseUrl' => 'http://localhost',
             ]);
 
