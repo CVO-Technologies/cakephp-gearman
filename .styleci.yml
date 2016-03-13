@@ -13,6 +13,7 @@ disabled:
 - blankline_after_open_tag
 - concat_without_spaces
 - phpdoc_align
+- phpdoc_inline_tag
 - spaces_cast
 - phpdoc_separation
 - no_blank_lines_after_class_opening

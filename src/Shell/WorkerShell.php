@@ -26,7 +26,9 @@ class WorkerShell extends Shell
             $worker->addFunction($job, function (GearmanJob $job) use ($options) {
                 $task = $this->Tasks->load($options['className']);
 
+                // @codingStandardsIgnoreStart
                 $workload = @unserialize($job->workload());
+                // @codingStandardsIgnoreEnd
                 if ($workload === false) {
                     $workload = $job->workload();
                 }

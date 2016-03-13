@@ -8,6 +8,12 @@ use Psr\Log\LogLevel;
 
 class EmailTask extends Shell
 {
+    /**
+     * Send an email using the provided transport.
+     *
+     * @param array $workload The fullBaseUrl, email and transport name
+     * @return array Information from the transport
+     */
     public function main(array $workload)
     {
         $defineFullBaseUrl = !empty($workload['fullBaseUrl']);
