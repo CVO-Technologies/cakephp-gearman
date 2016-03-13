@@ -38,6 +38,7 @@ before_script:
   - composer install --prefer-dist --no-interaction
 
   - sh -c "if [ '$PHPCS' = '1' ]; then composer require cakephp/cakephp-codesniffer:dev-master; fi"
+  - sh -c "bin/worker &"
 
 script:
   - sh -c "if [ '$PHPUNIT' = '1' ]; then vendor/phpunit/phpunit/phpunit; fi"
@@ -47,6 +48,9 @@ script:
   - sh -c "if [ '$CODECOVERAGE' = '1' ]; then vendor/phpunit/phpunit/phpunit --coverage-clover=clover.xml || true; fi"
   - sh -c "if [ '$CODECOVERAGE' = '1' ]; then wget -O codecov.sh https://codecov.io/bash; fi"
   - sh -c "if [ '$CODECOVERAGE' = '1' ]; then bash codecov.sh; fi"
+
+after_script:
+  - killall worker
 
 notifications:
   email: false
