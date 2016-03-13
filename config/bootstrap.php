@@ -3,10 +3,14 @@
 use Cake\Core\Configure;
 use Cake\Utility\Hash;
 
-\Cake\Core\Configure::write('Jobs.emailWithWorker', [
-    'className' => 'CvoTechnologies/Gearman.Email'
+Configure::write('Gearman.Jobs.emailWithWorker', [
+    'className' => 'CvoTechnologies/Gearman.Email',
 ]);
 
-Configure::write('DebugKit.panels', Hash::merge((array)Configure::read('DebugKit.panels'), [
-    'CvoTechnologies/Gearman.Job'
+if (!Configure::read('debug')) {
+    return;
+}
+
+Configure::write('DebugKit.panels', Hash::merge((array) Configure::read('DebugKit.panels'), [
+    'CvoTechnologies/Gearman.Job',
 ]));

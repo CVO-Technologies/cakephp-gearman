@@ -13,19 +13,20 @@ class WorkerTransport extends AbstractTransport
     use JobAwareTrait;
 
     /**
-     * Default config for this class
+     * Default config for this class.
      *
      * @var array
      */
     protected $_defaultConfig = [
         'transport' => 'default',
-        'background' => true
+        'background' => true,
     ];
 
     /**
-     * Send mail
+     * Send email.
      *
      * @param \Cake\Mailer\Email $email Email instance.
+     *
      * @return array|bool
      */
     public function send(Email $email)
@@ -33,7 +34,7 @@ class WorkerTransport extends AbstractTransport
         $result = $this->execute('emailWithWorker', [
             'email' => $email,
             'transport' => $this->config('transport'),
-            'fullBaseUrl' => Configure::read('App.fullBaseUrl')
+            'fullBaseUrl' => Configure::read('App.fullBaseUrl'),
         ], $this->config('background'));
 
         if (!$this->config('background')) {
