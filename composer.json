@@ -29,7 +29,7 @@
     },
     "require": {
         "ext-gearman": "*",
-        "cakephp/cakephp": "~3.0"
+        "cakephp/cakephp": "~3.2"
     },
     "require-dev": {
         "cakephp/cakephp-codesniffer": "2.*",
