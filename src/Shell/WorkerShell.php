@@ -20,7 +20,7 @@ class WorkerShell extends Shell
     {
         $worker = $this->gearmanWorker();
 
-        $jobs = self::_getJobs();
+        $jobs = $this->_getJobs();
 
         foreach ($jobs as $job => $options) {
             $worker->addFunction($job, function (GearmanJob $job) use ($options) {

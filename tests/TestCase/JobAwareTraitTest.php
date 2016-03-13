@@ -55,27 +55,28 @@ class JobAwareTraitTest extends TestCase
     /**
      * @dataProvider executeProvider
      */
-    public function testExecute($job, $workload, $background, $priority)
-    {
-        $jobAwareTraitClass = new JobAwareTraitClass();
-        $result = $jobAwareTraitClass->execute($job, $workload, $background, $priority);
-
-        if ($background) {
-            $this->assertContains(':', $result);
-        } else {
-            $this->assertEquals($workload, $result);
-        }
-    }
-
-    public function executeProvider()
-    {
-        return [
-            ['testJob', ['data'], false, Gearman::PRIORITY_NORMAL],
-            ['testJob', ['data'], true, Gearman::PRIORITY_NORMAL],
-            ['testJob', ['data'], false, Gearman::PRIORITY_LOW],
-            ['testJob', ['data'], true, Gearman::PRIORITY_HIGH]
-        ];
-    }
+//    public function testExecute($job, $workload, $background, $priority)
+//    {
+//
+//        $jobAwareTraitClass = new JobAwareTraitClass();
+//        $result = $jobAwareTraitClass->execute($job, $workload, $background, $priority);
+//
+//        if ($background) {
+//            $this->assertContains(':', $result);
+//        } else {
+//            $this->assertEquals($workload, $result);
+//        }
+//    }
+//
+//    public function executeProvider()
+//    {
+//        return [
+//            ['testJob', ['data'], false, Gearman::PRIORITY_NORMAL],
+//            ['testJob', ['data'], true, Gearman::PRIORITY_NORMAL],
+//            ['testJob', ['data'], false, Gearman::PRIORITY_LOW],
+//            ['testJob', ['data'], true, Gearman::PRIORITY_HIGH]
+//        ];
+//    }
 
     public function tearDown()
     {

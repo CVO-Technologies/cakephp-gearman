@@ -8,7 +8,6 @@ use GearmanWorker;
 
 trait JobAwareTrait
 {
-
     /**
      * Setup a GearmanClient object configured
      * with the servers from the configuration.
