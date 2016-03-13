@@ -185,3 +185,16 @@ Please note that the `execute()` method takes the following parameters:
 - `$workload`: mixed, can be either an array, string, int or everything else
 - `$background`: boolean, true to run in background
 - `$priority`: Gearman::PRIORITY_NORMAL, _LOW, _NORMAL or _HIGH
+
+
+## Patches & Features
+
+Before submitting a PR please make sure that:
+
+- [PHPUnit](http://book.cakephp.org/3.0/en/development/testing.html#running-tests)
+and [CakePHP Code Sniffer](https://github.com/cakephp/cakephp-codesniffer) tests pass
+- [Code Coverage](https://codecov.io/github/cvo-technologies/cakephp-gearman) does not decrease
+
+## Bugs & Feedback
+
+http://github.com/cvo-technologies/cakephp-gearman/issues

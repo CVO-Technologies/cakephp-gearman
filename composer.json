@@ -34,7 +34,8 @@
     },
     "require-dev": {
         "phpunit/phpunit": "4.1.*",
-        "cakephp/debug_kit": "~3.2"
+        "cakephp/debug_kit": "~3.2",
+        "cakephp/cakephp-codesniffer": "2.*"
     },
     "autoload": {
         "psr-4": {
