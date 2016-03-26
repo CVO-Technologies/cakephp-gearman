@@ -1,7 +1,7 @@
 # CakePHP Gearman plugin
 
 
-[![Build Status](https://img.shields.io/travis/cvo-technologies/cakephp-gearman/master.svg?style=flat-square)](https://travis-ci.org/CVO-Technologies/cakephp-gearman)
+[![Build Status](https://img.shields.io/travis/CVO-Technologies/cakephp-gearman/master.svg?style=flat-square)](https://travis-ci.org/CVO-Technologies/cakephp-gearman)
 [![StyleCI Status](https://styleci.io/repos/43746752/shield)](https://styleci.io/repos/43746752)
 [![Coverage Status](https://img.shields.io/codecov/c/github/cvo-technologies/cakephp-gearman/master.svg?style=flat-square)](https://codecov.io/github/cvo-technologies/cakephp-gearman)
 [![Total Downloads](https://img.shields.io/packagist/dt/cvo-technologies/cakephp-gearman.svg?style=flat-square)](https://packagist.org/packages/cvo-technologies/cakephp-gearman)
