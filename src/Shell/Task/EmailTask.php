@@ -33,7 +33,12 @@ class EmailTask extends Shell
             Configure::write('App.fullBaseUrl', $previousFullBaseUrl);
         }
 
-        $this->log(__('Sending email with subject {0} to {1}', $email->subject(), implode(',', $email->to())), LogLevel::INFO);
+        $subject = $email->subject();
+        if (method_exists($email, 'getOriginalSubject')) {
+            $subject = $email->getOriginalSubject();
+        }
+
+        $this->log(__('Sending email with subject {0} to {1}', $subject, implode(',', $email->to())), LogLevel::INFO);
 
         return $email->transport($workload['transport'])->send();
     }
